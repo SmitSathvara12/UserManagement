@@ -58,7 +58,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name */}
           <div>
             <label className="block mb-1 font-medium">Name</label>
 
@@ -72,7 +71,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label className="block mb-1 font-medium">Email</label>
             <input
@@ -85,7 +83,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
             />
           </div>
 
-          {/* Role */}
           <div>
             <label className="block mb-1 font-medium">Role</label>
             <select
@@ -99,7 +96,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
             </select>
           </div>
 
-          {/* Status */}
           <div>
             <label className="block mb-1 font-medium">Status</label>
 
@@ -114,7 +110,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
             </select>
           </div>
 
-          {/* Buttons */}
           <div className="flex justify-end gap-2 pt-2">
             <button
               type="button"

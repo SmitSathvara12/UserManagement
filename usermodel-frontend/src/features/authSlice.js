@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createUserAPI, loginAPI } from "../api/authAPI";
-import { toast } from "react-toastify";
 import { handelError, handelSuccess } from "../utiles";
 
 // LOGIN USER
@@ -14,7 +13,7 @@ export const loginUser = createAsyncThunk(
 
       localStorage.setItem("token", token);
       localStorage.setItem("user", user);
-      
+
       handelSuccess("Login successful");
 
       return user;

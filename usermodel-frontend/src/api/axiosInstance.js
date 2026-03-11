@@ -38,11 +38,10 @@ axiosInstance.interceptors.response.use(
         localStorage.removeItem("token");
         window.location.href = "/login";
       }
-      // Forbidden
       if (status === 403) {
         handelError("You are not authorized for this action.");
       }
-      // Server Error
+
       if (status === 500) {
         handelError("Server error. Try again later.");
       }

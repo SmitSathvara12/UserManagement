@@ -29,7 +29,7 @@ const dispatch = useDispatch();
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={!isAuthenticated ? <Login></Login> : <Dashborad/>} />
-          <Route path="/" element={isAuthenticated ?<Dashborad/> : <Login></Login>} />
+          <Route path="/" element={isAuthenticated ? <Dashborad/> : <Login></Login>} />
           <Route path="/createUser" element={
             <ProtectedRoute>
               <CreateUser/>

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getUsersAPI, updateUserAPI } from "../api/userAPI";
-import { toast } from "react-toastify";
+import { handelError, handelSuccess } from "../utiles";
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
@@ -9,7 +9,7 @@ export const fetchUsers = createAsyncThunk(
       const res = await getUsersAPI(params);
       return res.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to fetch users");
+      handelError(error?.response?.data?.message || "Failed to fetch users");
       return rejectWithValue(error?.response?.data);
     }
   }
@@ -20,10 +20,10 @@ export const updateUserAsync = createAsyncThunk(
   async ({ id, data }, { rejectWithValue }) => {
     try {
       const res = await updateUserAPI(id, data);
-      toast.success("User updated successfully");
+      handelSuccess("User updated successfully");
       return res.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to update user");
+      handelError(error?.response?.data?.message || "Failed to update user");
       return rejectWithValue(error?.response?.data);
     }
   }
