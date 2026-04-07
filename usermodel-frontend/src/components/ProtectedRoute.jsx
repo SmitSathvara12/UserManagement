@@ -10,6 +10,7 @@ const ProtectedRoute = ({ children }) => {
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
+
   // Check role 
   if (user?.role !== "admin") {
     return <Navigate to="/" replace />;

@@ -1,7 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login";
 import Dashborad from "./pages/Dashborad";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,34 +12,43 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ManageUsers from "./pages/ManageUsers";
 
 function App() {
-const dispatch = useDispatch();
- const { isAuthenticated,user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(loadUser());
     console.log(user);
-    
   }, [dispatch]);
-
-
 
   return (
     <>
       <ToastContainer position="top-right" theme="colored" autoClose={3000} />
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={!isAuthenticated ? <Login></Login> : <Dashborad/>} />
-          <Route path="/" element={isAuthenticated ? <Dashborad/> : <Login></Login>} />
-          <Route path="/createUser" element={
-            <ProtectedRoute>
-              <CreateUser/>
-            </ProtectedRoute>
-          } />
-          <Route path="/manageUser" element={
-            <ProtectedRoute>
-              <ManageUsers/>
-            </ProtectedRoute>
-          } />
+          <Route
+            path="/login"
+            element={!isAuthenticated ? <Login></Login> : <Dashborad />}
+          />
+          <Route
+            path="/"
+            element={isAuthenticated ? <Dashborad /> : <Login></Login>}
+          />
+          <Route
+            path="/createUser"
+            element={
+              <ProtectedRoute>
+                <CreateUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/manageUser"
+            element={
+              <ProtectedRoute>
+                <ManageUsers />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

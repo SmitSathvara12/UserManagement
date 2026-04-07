@@ -1,16 +1,20 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
-import Popup from "../components/Popup";
+import Popup from "../components/Popup.jsx";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+// import { persistor } from "../app/store.js";
 
 const Navbar = () => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+
   const Navigate = useNavigate();
+
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
+    // persistor.purge();
     Navigate("/login");
   };
   return (

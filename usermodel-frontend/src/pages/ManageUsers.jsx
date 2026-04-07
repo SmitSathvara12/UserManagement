@@ -6,11 +6,20 @@ import EditUserModal from "../components/EditUserModal";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { handelError, handelSuccess } from "../utiles";
-import Popup from "../components/popup.jsx";
+import Popup from "../components/Popup.jsx";
+import { Link, useLocation } from "react-router-dom";
 
-const ManageUsers = () => {
+const ManageUsers = ({ setIsOpen }) => {
   const dispatch = useDispatch();
   const { users, loading } = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.auth);
+  const location = useLocation();
+  const isAdmin = user?.role === "admin";
+
+  const activeClass = (path) =>
+    location.pathname === path
+      ? ""
+      : "hover:bg-blue-600 flex  p-2 ml-130 text-white rounded bg-blue-700";
 
   const [deleting, setDeleting] = useState(null);
   const [editingUser, setEditingUser] = useState(null);
@@ -34,18 +43,18 @@ const ManageUsers = () => {
   }, [search, statusFilter, roleFilter]);
 
   const handleDelete = async () => {
-  try {
-    setDeleting(selectedUserId);
-    await deleteUserAPI(selectedUserId);
-    handelSuccess("User deleted successfully");
-    dispatch(fetchUsers());
-  } catch (error) {
-    handelError("Failed to delete user", error);
-  } finally {
-    setDeleting(null);
-    setSelectedUserId(null);
-  }
-};
+    try {
+      setDeleting(selectedUserId);
+      await deleteUserAPI(selectedUserId);
+      handelSuccess("User deleted successfully");
+      dispatch(fetchUsers());
+    } catch (error) {
+      handelError("Failed to delete user", error);
+    } finally {
+      setDeleting(null);
+      setSelectedUserId(null);
+    }
+  };
 
   const handleEdit = (user) => {
     setEditingUser(user);
@@ -125,6 +134,18 @@ const ManageUsers = () => {
             >
               <i className="fa-solid fa-xmark rounded"></i>
             </button>
+
+            {isAdmin && (
+              <>
+                <Link
+                  to="/createUser"
+                  className={activeClass("/createUser")}
+                  onClick={() => setIsOpen(false)}
+                >
+                  + Create User
+                </Link>
+              </>
+            )}
           </div>
 
           {/* User Table */}
