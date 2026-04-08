@@ -97,7 +97,7 @@ const Dashboard = () => {
                     <p className="text-purple-100 text-sm font-medium">Administrators</p>
                     <p className="text-white text-3xl font-bold mt-1">{totalAdmins}</p>
                   </div>
-               *
+               
                 </div>
               </div>
               {/* Card Footer */}

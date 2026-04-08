@@ -22,7 +22,7 @@ const Login = () => {
         loginUser({
           email,
           password,
-        })
+        }),
       );
 
       if (result.payload) {
