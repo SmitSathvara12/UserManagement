@@ -7,6 +7,8 @@ import Navbar from "../components/Navbar";
 const Profile = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  console.log("user",user);
+  
 
   if (!user) {
     return (
@@ -98,10 +100,10 @@ const Profile = () => {
                 {/* User Info - Middle Section */}
                 <div className="flex-1 min-w-0">
                   <h2 className="text-xl sm:text-2xl font-bold text-white mb-0.5 truncate">
-                    {user.name}
+                    {user.name || "User"}
                   </h2>
                   <p className="text-indigo-100 text-xs sm:text-sm truncate">
-                    {user.email}
+                    {user.email || "No email provided"}
                   </p>
                 </div>
 
@@ -153,9 +155,9 @@ const Profile = () => {
                       Email Address
                     </label>
                     <div className="flex items-center gap-3 bg-indigo-50 rounded-xl px-4 py-3 border border-indigo-100">
-                      <i className="fa-solid fa-envelope text-black shrink-0"></i>
-                      <p className="text-gray-800 font-medium break-all flex-1">{user.email}</p>
-                      <i className="fa-solid fa-check-circle text-green-500 shrink-0"></i>
+                      <i className="fa-solid fa-envelope text-indigo-600 shrink-0"></i>
+                      <p className="text-gray-800 font-medium break-all flex-1">{user.email || "Not provided"}</p>
+                      {user.email && <i className="fa-solid fa-check-circle text-green-500 shrink-0"></i>}
                     </div>
                   </div>
 
@@ -228,21 +230,23 @@ const Profile = () => {
 
               {/* Last Updated Info */}
               <div>
-                <label className="block text-xs uppercase font-bold  text-black tracking-widest mb-3">
+                <label className="block text-xs uppercase font-bold text-black tracking-widest mb-3">
                   Last Updated
                 </label>
-                {user.updatedAt ? (
-                  <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
-                    <p className="text-gray-900 font-semibold">
-                      {formatDate(user.updatedAt)}
-                    </p>
-                    <p className="text-sm text-gray-700 mt-1">
-                      {formatTime(user.updatedAt)}
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-gray-400">N/A</p>
-                )}
+                <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
+                  {user.updatedAt ? (
+                    <>
+                      <p className="text-gray-900 font-semibold">
+                        {formatDate(user.updatedAt)}
+                      </p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {formatTime(user.updatedAt)}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-gray-600">Not available</p>
+                  )}
+                </div>
               </div>
 
               {/* Security Info Footer */}

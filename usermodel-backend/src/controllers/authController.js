@@ -16,7 +16,7 @@ export const createUser = async (req, res) => {
     name,
     email,
     password,
-    role
+    role,
   });
 
   res.status(201).json({
@@ -37,7 +37,7 @@ export const loginUser = async (req, res) => {
         message: "User not found",
       });
     }
-    if (user.status !== 'active') {
+    if (user.status !== "active") {
       return res.status(404).json({
         message: "User is inactive ,please contact to tour admin",
       });
@@ -55,11 +55,15 @@ export const loginUser = async (req, res) => {
     res.json({
       message: "Login successful",
       user: {
-        id: user._id,
+        _id: user._id,
         name: user.name,
+        email: user.email, 
         role: user.role,
+        status: user.status, 
+        createdAt: user.createdAt, 
+        updatedAt: user.updatedAt,
       },
-      token 
+      token,
     });
   } catch (error) {
     console.error("Login Error:", error);
