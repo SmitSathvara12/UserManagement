@@ -2,15 +2,20 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../features/authSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FormInput from "../components/FormInput";
+import FormButton from "../components/FormButton";
+import FormContainer from "../components/FormContainer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const result = await dispatch(
@@ -25,67 +30,43 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-200 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <FormContainer title="Login" className="space-y-4">
+        <FormInput
+          label="Email Address"
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-      <div className="w-full max-w-md">
+        <FormInput
+          label="Password"
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white p-8 rounded-2xl shadow-lg"
-        >
-
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-700">
-            Login
-          </h2>
-
-          {/* Email */}
-          <div className="mb-5">
-            <label className="block text-sm font-semibold text-gray-600 mb-2">
-              Email Address
-            </label>
-
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          {/* Password */}
-          <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-600 mb-2">
-              Password
-            </label>
-
-            <input
-              type="password"
-              placeholder="Enter your password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          {/* Button */}
-          <button
+        <div className="pt-2">
+          <FormButton
             type="submit"
-            className="w-full bg-blue-500 text-white py-2.5 rounded-lg hover:bg-blue-600 transition duration-200 font-medium"
-          >
-            Login
-          </button>
-
-        </form>
-
-      </div>
-
+            label="Login"
+            onClick={handleSubmit}
+            loading={loading}
+            variant="primary"
+            className="w-full"
+          />
+        </div>
+      </FormContainer>
     </div>
   );
 };

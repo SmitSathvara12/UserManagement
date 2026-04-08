@@ -22,7 +22,7 @@ const Dashboard = () => {
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col md:ml-64">
         <div className="md:hidden p-4">
           <button
             onClick={() => setIsOpen(true)}

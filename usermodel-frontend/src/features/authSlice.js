@@ -12,7 +12,7 @@ export const loginUser = createAsyncThunk(
       const { token, user } = res.data;
 
       localStorage.setItem("token", token);
-      localStorage.setItem("user", user);
+      localStorage.setItem("user", JSON.stringify(user));
 
       handelSuccess("Login successful");
 
@@ -63,7 +63,7 @@ const authSlice = createSlice({
   initialState: {
     user: JSON.parse(localStorage.getItem("user")) || null,
     loading: false,
-    isAuthenticated: false,
+    isAuthenticated: !!localStorage.getItem("token"),
   },
 
   reducers: {
@@ -92,9 +92,18 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
 
+      .addCase(loadUser.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(loadUser.fulfilled, (state, action) => {
+        state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = !!action.payload;
+      })
+      .addCase(loadUser.rejected, (state) => {
+        state.loading = false;
+        state.isAuthenticated = false;
+        state.user = null;
       });
   },
 });
