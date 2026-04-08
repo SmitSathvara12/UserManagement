@@ -104,7 +104,7 @@ const Navbar = () => {
                       )}
                     </p>
                   </div>
-                  <i className={`fa-solid fa-chevron-down text-xs text-gray-600 transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`}></i>
+                  <i className={`fa-solid fa-chevron-down text-xs text-gray-600 transition-transform duration-500 ${showDropdown ? 'rotate-180' : ''}`}></i>
                 </button>
 
                 {/* Dropdown Menu */}

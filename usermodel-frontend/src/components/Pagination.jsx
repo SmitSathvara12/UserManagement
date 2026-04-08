@@ -4,7 +4,7 @@ const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
-  itemsPerPage = 5,
+  // itemsPerPage = 5,
 }) => {
   const [inputPage, setInputPage] = useState("");
 
