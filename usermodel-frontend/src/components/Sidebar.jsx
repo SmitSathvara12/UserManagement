@@ -64,38 +64,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             <p className="text-xs text-gray-400 ml-13 hidden sm:block">User Management System</p>
           </div>
 
-          {/* User Info Section */}
-          {user && (
-            <div className="mb-8 pb-6 px-6 border-b border-gray-700">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-sm font-semibold">
-                  {user.name?.charAt(0).toUpperCase()}
-                </div>
-                <div className="flex flex-col flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-white truncate">
-                    {user.name}
-                  </p>
-                  <p className="text-xs text-gray-400 truncate">{user.email}</p>
-                </div>
-              </div>
-              <div className="mt-3">
-                <span
-                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
-                    user.role === "admin"
-                      ? "bg-purple-500/20 text-purple-300"
-                      : "bg-blue-500/20 text-blue-300"
-                  }`}
-                >
-                  <i
-                    className={`fa-solid ${
-                      user.role === "admin" ? "fa-crown" : "fa-user"
-                    }`}
-                  ></i>
-                  {user.role === "admin" ? "Administrator" : "User"}
-                </span>
-              </div>
-            </div>
-          )}
 
           {/* Navigation Menu */}
           <nav className="px-6 pb-6">
