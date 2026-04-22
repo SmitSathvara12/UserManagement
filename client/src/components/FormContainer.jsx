@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormContainer = ({ title, children, className = "" }) => {
+const FormContainer = ({ title, children, className = "", onSubmit }) => {
   return (
     <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md border border-gray-100">
       {title && (
@@ -8,7 +8,7 @@ const FormContainer = ({ title, children, className = "" }) => {
           {title}
         </h2>
       )}
-      <form className={className}>{children}</form>
+      <form className={className} onSubmit={onSubmit}>{children}</form>
     </div>
   );
 };

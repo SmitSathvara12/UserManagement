@@ -1,8 +1,11 @@
-import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../features/authSlice";
-import Sidebar from "../components/Sidebar";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createUserSchema } from "../schemas/formSchemas";
+import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import FormInput from "../components/FormInput";
 import FormSelect from "../components/FormSelect";
@@ -13,38 +16,27 @@ const CreateUser = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "user",
-  });
-
   const roleOptions = [
     { value: "user", label: "User" },
     { value: "admin", label: "Admin" },
   ];
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(createUserSchema),
+    defaultValues: { name: "", email: "", password: "", role: "user" },
+  });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     setLoading(true);
-
     try {
-      const result = await dispatch(createUser(formData));
+      const result = await dispatch(createUser(data));
       if (result) {
-        setFormData({
-          name: "",
-          email: "",
-          password: "",
-          role: "user",
-        });
+        reset();
         navigate("/manageUser");
       }
       return result;
@@ -68,43 +60,36 @@ const CreateUser = () => {
               Create User
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <FormInput
                 label="Name"
                 type="text"
-                name="name"
                 placeholder="Enter Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
+                error={errors.name?.message}
+                {...register("name")}
               />
 
               <FormInput
                 label="Email"
                 type="email"
-                name="email"
                 placeholder="Enter Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                required
+                error={errors.email?.message}
+                {...register("email")}
               />
 
               <FormInput
                 label="Password"
                 type="password"
-                name="password"
                 placeholder="Enter Password"
-                value={formData.password}
-                onChange={handleChange}
-                required
+                error={errors.password?.message}
+                {...register("password")}
               />
 
               <FormSelect
                 label="Role"
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
                 options={roleOptions}
+                error={errors.role?.message}
+                {...register("role")}
               />
 
               <div className="flex gap-3 pt-2">

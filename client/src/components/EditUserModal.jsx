@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserAsync } from "../features/userSlice";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { editUserSchema } from "../schemas/formSchemas";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import FormButton from "./FormButton";
@@ -8,13 +11,6 @@ import FormButton from "./FormButton";
 const EditUserModal = ({ isOpen, user, onClose }) => {
   const dispatch = useDispatch();
   const { updating } = useSelector((state) => state.users);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    role: "user",
-    status: "active",
-  });
 
   const roleOptions = [
     { value: "user", label: "User" },
@@ -26,37 +22,27 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
     { value: "inactive", label: "Inactive" },
   ];
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(editUserSchema) });
+
   useEffect(() => {
     if (user) {
-      setFormData({
+      reset({
         name: user.name,
         email: user.email,
         role: user.role,
         status: user.status,
       });
     }
-  }, [user, isOpen]);
+  }, [user, isOpen, reset]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async (data) => {
     if (user?._id) {
-      await dispatch(
-        updateUserAsync({
-          id: user._id,
-          data: formData,
-        })
-      );
-
+      await dispatch(updateUserAsync({ id: user._id, data }));
       onClose();
     }
   };
@@ -71,41 +57,35 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
             Edit User
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <FormInput
               label="Name"
               type="text"
-              name="name"
               placeholder="Enter Full Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
+              error={errors.name?.message}
+              {...register("name")}
             />
 
             <FormInput
               label="Email"
               type="email"
-              name="email"
               placeholder="Enter Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required
+              error={errors.email?.message}
+              {...register("email")}
             />
 
             <FormSelect
               label="Role"
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
               options={roleOptions}
+              error={errors.role?.message}
+              {...register("role")}
             />
 
             <FormSelect
               label="Status"
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
               options={statusOptions}
+              error={errors.status?.message}
+              {...register("status")}
             />
 
             <div className="flex justify-end gap-3 pt-4">
