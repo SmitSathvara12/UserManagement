@@ -254,9 +254,7 @@ const ManageUsers = ({ setIsOpen }) => {
                             >
                               <i
                                 className={`fa-solid ${
-                                  user.role === "admin"
-                                    ? "fa-crown"
-                                    : "fa-user"
+                                  user.role === "admin" ? "fa-crown" : "fa-user"
                                 }`}
                               ></i>
                               {user.role.charAt(0).toUpperCase() +
@@ -318,8 +316,13 @@ const ManageUsers = ({ setIsOpen }) => {
                 {/* Results Info */}
                 <div className="px-4 sm:px-6 py-4 bg-gray-50 border-t border-gray-200 text-sm text-gray-600">
                   <p>
-                    Showing <span className="font-semibold">{currentUsers.length}</span> of{" "}
-                    <span className="font-semibold">{filteredUsers.length}</span> users
+                    Showing{" "}
+                    <span className="font-semibold">{currentUsers.length}</span>{" "}
+                    of{" "}
+                    <span className="font-semibold">
+                      {filteredUsers.length}
+                    </span>{" "}
+                    users
                   </p>
                 </div>
               </>
