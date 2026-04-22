@@ -7,8 +7,6 @@ import Navbar from "../components/Navbar";
 const Profile = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  console.log("user",user);
-  
 
   if (!user) {
     return (
@@ -19,8 +17,12 @@ const Profile = () => {
           <div className="flex justify-center items-center flex-1 p-4">
             <div className="text-center">
               <i className="fa-solid fa-user-slash text-6xl text-gray-300 mb-4"></i>
-              <p className="text-gray-600 text-lg font-semibold">User not found</p>
-              <p className="text-gray-500 text-sm mt-2">Please login to view your profile</p>
+              <p className="text-gray-600 text-lg font-semibold">
+                User not found
+              </p>
+              <p className="text-gray-500 text-sm mt-2">
+                Please login to view your profile
+              </p>
             </div>
           </div>
         </div>
@@ -66,7 +68,9 @@ const Profile = () => {
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
                 My Profile
               </h1>
-              <p className="text-gray-600">View and manage your account information</p>
+              <p className="text-gray-600">
+                View and manage your account information
+              </p>
             </div>
             <button
               onClick={() => navigate(-1)}
@@ -88,11 +92,13 @@ const Profile = () => {
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-linear-to-br from-indigo-300 to-blue-400 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold shadow-lg border-4 border-white">
                     {user.name?.charAt(0).toUpperCase()}
                   </div>
-                  
+
                   {/* Status indicator dot */}
-                  <div className={`absolute bottom-0 right-0 w-5 h-5 rounded-full border-3 border-white flex items-center justify-center ${
-                    isActive ? "bg-green-400" : "bg-red-400"
-                  }`}>
+                  <div
+                    className={`absolute bottom-0 right-0 w-5 h-5 rounded-full border-3 border-white flex items-center justify-center ${
+                      isActive ? "bg-green-400" : "bg-red-400"
+                    }`}
+                  >
                     <i className="fa-solid fa-circle text-xs text-white"></i>
                   </div>
                 </div>
@@ -110,24 +116,34 @@ const Profile = () => {
                 {/* Status and Role Badges - Right Section */}
                 <div className="flex flex-wrap gap-2 sm:gap-3 justify-start sm:justify-end shrink-0">
                   {/* Role Badge */}
-                  <span className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm whitespace-nowrap ${
-                    isAdmin
-                      ? "bg-purple-300 bg-opacity-40 text-white border border-purple-300 border-opacity-50"
-                      : "bg-blue-300 bg-opacity-40 text-white border border-blue-300 border-opacity-50"
-                  }`}>
-                    <i className={`fa-solid ${isAdmin ? "fa-crown" : "fa-user"} text-xs`}></i>
-                    <span className="hidden sm:inline">{isAdmin ? "Admin" : "User"}</span>
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm whitespace-nowrap ${
+                      isAdmin
+                        ? "bg-purple-300 bg-opacity-40 text-white border border-purple-300 border-opacity-50"
+                        : "bg-blue-300 bg-opacity-40 text-white border border-blue-300 border-opacity-50"
+                    }`}
+                  >
+                    <i
+                      className={`fa-solid ${isAdmin ? "fa-crown" : "fa-user"} text-xs`}
+                    ></i>
+                    <span className="hidden sm:inline">
+                      {isAdmin ? "Admin" : "User"}
+                    </span>
                     <span className="sm:hidden">{isAdmin ? "A" : "U"}</span>
                   </span>
 
                   {/* Status Badge */}
-                  <span className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm whitespace-nowrap ${
-                    isActive
-                      ? "bg-green-300 bg-opacity-40 text-white border border-green-300 border-opacity-50"
-                      : "bg-red-300 bg-opacity-40 text-white border border-red-300 border-opacity-50"
-                  }`}>
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm whitespace-nowrap ${
+                      isActive
+                        ? "bg-green-300 bg-opacity-40 text-white border border-green-300 border-opacity-50"
+                        : "bg-red-300 bg-opacity-40 text-white border border-red-300 border-opacity-50"
+                    }`}
+                  >
                     <i className="fa-solid fa-circle text-xs"></i>
-                    <span className="hidden sm:inline">{isActive ? "Active" : "Inactive"}</span>
+                    <span className="hidden sm:inline">
+                      {isActive ? "Active" : "Inactive"}
+                    </span>
                     <span className="sm:hidden">{isActive ? "On" : "Off"}</span>
                   </span>
                 </div>
@@ -156,8 +172,12 @@ const Profile = () => {
                     </label>
                     <div className="flex items-center gap-3 bg-indigo-50 rounded-xl px-4 py-3 border border-indigo-100">
                       <i className="fa-solid fa-envelope text-indigo-600 shrink-0"></i>
-                      <p className="text-gray-800 font-medium break-all flex-1">{user.email || "Not provided"}</p>
-                      {user.email && <i className="fa-solid fa-check-circle text-green-500 shrink-0"></i>}
+                      <p className="text-gray-800 font-medium break-all flex-1">
+                        {user.email || "Not provided"}
+                      </p>
+                      {user.email && (
+                        <i className="fa-solid fa-check-circle text-green-500 shrink-0"></i>
+                      )}
                     </div>
                   </div>
 
@@ -181,12 +201,16 @@ const Profile = () => {
                     <label className="block text-xs uppercase font-bold text-black tracking-widest mb-2">
                       Account Role
                     </label>
-                    <div className={`inline-flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm ${
-                      isAdmin
-                        ? "bg-purple-100 text-purple-700 border border-purple-200"
-                        : "bg-blue-100 text-blue-700 border border-blue-200"
-                    }`}>
-                      <i className={`fa-solid ${isAdmin ? "fa-crown" : "fa-user"}`}></i>
+                    <div
+                      className={`inline-flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm ${
+                        isAdmin
+                          ? "bg-purple-100 text-purple-700 border border-purple-200"
+                          : "bg-blue-100 text-blue-700 border border-blue-200"
+                      }`}
+                    >
+                      <i
+                        className={`fa-solid ${isAdmin ? "fa-crown" : "fa-user"}`}
+                      ></i>
                       {isAdmin ? "Administrator" : "Regular User"}
                     </div>
                   </div>
@@ -196,11 +220,13 @@ const Profile = () => {
                     <label className="block text-xs uppercase font-bold  text-black tracking-widest mb-2">
                       Account Status
                     </label>
-                    <div className={`inline-flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm ${
-                      isActive
-                        ? "bg-green-100 text-green-700 border border-green-200"
-                        : "bg-red-100 text-red-700 border border-red-200"
-                    }`}>
+                    <div
+                      className={`inline-flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm ${
+                        isActive
+                          ? "bg-green-100 text-green-700 border border-green-200"
+                          : "bg-red-100 text-red-700 border border-red-200"
+                      }`}
+                    >
                       <i className="fa-solid fa-circle text-xs"></i>
                       {isActive ? "Active" : "Inactive"}
                     </div>
@@ -258,7 +284,8 @@ const Profile = () => {
                       Account Security
                     </p>
                     <p className="text-xs text-green-700 mt-1">
-                      Your account is secure and all your information is protected with encryption.
+                      Your account is secure and all your information is
+                      protected with encryption.
                     </p>
                   </div>
                 </div>

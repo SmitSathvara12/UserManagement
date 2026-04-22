@@ -14,16 +14,19 @@ import Profile from "./pages/Profile";
 
 function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(loadUser());
-    console.log(user);
   }, [dispatch]);
 
   return (
     <>
-      <ToastContainer position="bottom-right" theme="colored" autoClose={3000} />
+      <ToastContainer
+        position="bottom-right"
+        theme="colored"
+        autoClose={3000}
+      />
       <BrowserRouter>
         <Routes>
           <Route
