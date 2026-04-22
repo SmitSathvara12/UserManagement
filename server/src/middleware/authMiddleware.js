@@ -5,7 +5,7 @@ const protect = async (req, res, next) => {
   try {
     // Check for token in cookies first, then in Authorization header
     let token = req.cookies.userToken;
-    
+
     if (!token) {
       // Check Authorization header (Bearer token)
       const authHeader = req.headers.authorization;

@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
 
-export const getProfile = async (req,res) => {
+export const getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
 
@@ -22,7 +22,7 @@ export const getProfile = async (req,res) => {
 };
 
 /* GET ALL USERS */
-export const getUsers = async (req,res) => {
+export const getUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password").sort({ createdAt: -1 });
     res.status(200).json({
@@ -37,7 +37,7 @@ export const getUsers = async (req,res) => {
 };
 
 /* GET SINGLE USER */
-export const getUserById = async (req,res) => {
+export const getUserById = async (req, res) => {
   const user = await User.findById(req.body.id).select("-password");
 
   if (!user) {
@@ -48,7 +48,7 @@ export const getUserById = async (req,res) => {
 };
 
 /* UPDATE USER */
-export const updateUser = async (req,res) => {
+export const updateUser = async (req, res) => {
   try {
     const user = await User.findById(req.body.id).select("+password");
 
@@ -76,7 +76,7 @@ export const updateUser = async (req,res) => {
 };
 
 /* DELETE USER */
-export const deleteUser = async (req,res) => {
+export const deleteUser = async (req, res) => {
   const user = await User.findById(req.body.id);
 
   if (!user) {
