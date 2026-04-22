@@ -1,175 +1,270 @@
+UserModel 👥
+A modern user management system that provides comprehensive administration tools for managing users with role-based access control, authentication, and real-time analytics.
 
-🚀 UserModel - User Management System
-A full-stack user management application built with modern web technologies. It provides secure authentication, role-based access control, and complete user administration features.
+🌟 Features
 
-📌 Overview
-UserModel is designed to handle user operations efficiently with a scalable architecture. It supports authentication, authorization, and admin-level control with a responsive frontend and robust backend.
+User Authentication: Secure login and registration with JWT tokens
+Role-Based Access Control: Admin and regular user roles with different permissions
+User Management: Create, read, update, and delete user accounts
+Advanced Search & Filter: Find users by name, email, status, or role
+Real-Time Dashboard: View user statistics and system health indicators
+User Profiles: Manage personal information and account details
+Pagination System: Navigate through users with 5 items per page
+Password Security: Encrypted passwords with bcryptjs hashing
+Responsive Design: Works seamlessly on desktop and mobile devices
+Session Management: Persistent login with token-based authentication
+Toast Notifications: Real-time success and error messages
+Edit & Delete Operations: Manage users with confirmation popups
 
-✨ Key Features:
+🚀 Getting Started
+Prerequisites
+Make sure you have the following installed:
 
-🔐 Authentication & Security
-User registration with validation
-Secure login using JWT
-Password hashing using bcrypt
-Token-based authorization
-Protected routes
+Node.js (v18 or higher)
+npm or yarn
+MongoDB (v5.0 or higher)
 
-👥 User Management
-Create, update, and delete users
-View all users with pagination
-Search by name or email
-Filter by role and status
+Or MongoDB Atlas (Cloud service)
 
-🛡️ Role-Based Access Control
-Admin
-Full CRUD access
-Dashboard & analytics
-User
-View profile
-Limited dashboard access
+Git
 
-📊 Dashboard
-Total users count
-Active vs inactive users
-Admin vs user distribution
-Real-time statistics
+Installation
 
-🙍 Profile Management
-View personal details
-Account status & role
-Created & updated timestamps
+Clone the repository
 
-🛠️ Tech Stack
-Frontend
-React (Vite)
-Redux Toolkit
-React Router
-Tailwind CSS
-Axios
-Backend
-Node.js
-Express.js
-MongoDB (Mongoose)
-JWT Authentication
-Joi Validation
-
-📁 Project Structure
-UserModel/
-├── usermodel-backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── models/
-│   ├── middleware/
-│   └── utils/
-│
-└── usermodel-frontend/
-    ├── components/
-    ├── pages/
-    ├── features/
-    └── api/
-    
-⚙️ Installation & Setup
-1️⃣ Clone Repository
-git clone https://github.com/yourusername/usermodel.git
+bashgit clone https://github.com/yourusername/usermodel.git
 cd usermodel
-2️⃣ Backend Setup
-cd usermodel-backend
+
+Install Backend Dependencies
+
+bashcd usermodel-backend
 npm install
 
-Create .env file:
+Install Frontend Dependencies
 
-PORT=3000
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret_key
+bashcd ../usermodel-frontend
+npm install
+
+Set up environment variables
+
+Backend - Create .env in usermodel-backend/:
+envPORT=3000
+NODE_ENV=development
+MONGO_URI=mongodb://localhost:27017/usermodel
+JWT_SECRET=your_super_secret_jwt_key_here
 JWT_EXPIRE=7d
 CORS_ORIGIN=http://localhost:5173
+Frontend - Create .env in usermodel-frontend/:
+envVITE_API_URL=http://localhost:3000/api
 
-Run backend:
+Start the Development Servers
+
+Terminal 1 - Backend:
+bashcd usermodel-backend
 npm run dev
-
-3️⃣ Frontend Setup
-cd ../usermodel-frontend
-npm install
-
-Create .env file:
-VITE_API_URL=http://localhost:3000/api
-
-Run frontend:
+Backend runs on http://localhost:3000
+Terminal 2 - Frontend:
+bashcd usermodel-frontend
 npm run dev
+Frontend runs on http://localhost:5173
 
-▶️ Running the App
-Service	URL
-Backend	http://localhost:3000
-Frontend	http://localhost:5173
 
-📡 API Overview
+🛠️ Tech Stack :
+
+Frontend
+
+React.js - UI library with modern hooks
+Vite - Lightning-fast build tool
+Redux Toolkit - State management
+React Router DOM - Client-side routing
+Axios - HTTP client for API calls
+Tailwind CSS - Utility-first CSS framework
+React Toastify - Toast notifications
+
+Backend
+
+Node.js - JavaScript runtime
+Express.js - Web framework
+MongoDB - NoSQL database
+Mongoose - Object data modeling
+JWT - Secure authentication
+bcryptjs - Password hashing
+Joi - Data validation
+CORS - Cross-origin resource sharing
+
+📱 Usage
+For Regular Users
+
+Register: Create a new account with email and password
+Login: Sign in with your credentials
+Dashboard: View overall system statistics
+Profile: Access and view your personal information
+Logout: Securely logout from your account
+
+For Admin Users
+All Regular User Features +
+Create Users: Add new users to the system with role assignment
+
+Manage Users:
+View all users with detailed information
+Search by name or email
+Filter by role (Admin/User) and status (Active/Inactive)
+Edit user details
+Delete users with confirmation
+
+
+Pagination: Navigate through user lists (5 per page)
+
+Dashboard Analytics:
+
+View total users count
+Monitor active users
+Track admin vs regular users
+View system health status
+
+
+
+🔧 API Endpoints :
+
 Authentication
-POST /auth/createUser → Register
-POST /auth/login → Login
-POST /auth/logout → Logout
 
-Users
-GET /users → Get all users
-GET /users/profile → Current user
-POST /users/updateuser → Update (Admin)
-POST /users/deleteuser → Delete (Admin)
+POST /api/auth/createUser - Register new user
+POST /api/auth/login - User login
+POST /api/auth/logout - User logout
 
-🔄 Authentication Flow
-User registers
-Password is hashed (bcrypt)
-Login generates JWT token
-Token stored in client
-Token sent in headers for protected routes
-Server verifies token for access
+User Management
 
-🧠 State Management (Redux)
-Auth Slice
-Login / Register
-Store token & user
-Logout handling
-User Slice
-Fetch users
-Update user
-Delete user
+GET /api/users - Get all users (protected)
+GET /api/users/profile - Get current user profile
+POST /api/users/getuserbyid - Get specific user by ID
+POST /api/users/updateuser - Update user details (Admin only)
+POST /api/users/deleteuser - Delete user (Admin only)
 
-🎯 Core Functional Pages
-Login Page → Authentication
-Dashboard → Statistics overview
-Manage Users → CRUD operations
-Create User → Admin-only
-Profile Page → User details
-
-🧪 Test Credentials
-Admin:
-admin@example.com / password123
-
-User:
-user@example.com / password123
-
-⚠️ Troubleshooting
-MongoDB Connection Error
-Check MONGO_URI
-Ensure MongoDB is running
-Port Already in Use
-lsof -i :3000
-kill -9 <PID>
-CORS Issues
-Verify CORS_ORIGIN
-Check frontend API URL
-Token Expired
-Re-login
-Check JWT settings
+🎨 Screenshots
+Login Page
+Clean and simple login interface with form validation
+Dashboard
+Real-time statistics with user counts, active users, admins, and regular users
+Manage Users Page
+Comprehensive user management with search, filter, pagination, and action buttons
+Edit User Modal
+Modal for updating user information with role and status selection
+User Profile
+Detailed user profile display with account information and security status
 
 🤝 Contributing
-Fork repository
-Create feature branch
-Commit changes
-Push to GitHub
-Open Pull Request
+
+Fork the repository
+
+bashgit clone https://github.com/yourusername/usermodel.git
+
+Create your feature branch
+
+bashgit checkout -b feature/AmazingFeature
+
+Commit your changes
+
+bashgit commit -m 'Add some AmazingFeature'
+
+Push to the branch
+
+bashgit push origin feature/AmazingFeature
+
+Open a Pull Request
+
+📝 License
+This project is licensed under the ISC License - see the LICENSE file for details.
+
+👨‍💻 Authors
+Smit - Initial Development and Design
 
 
-📬 Support
-For issues or suggestions:
+🙏 Acknowledgments
 
-Open a GitHub issue
-Provide clear description
+Built with modern web technologies
+UI inspiration from modern admin dashboards
+Icons from Font Awesome
+Styling with Tailwind CSS
+State management with Redux Toolkit
+
+
+🐛 Common Issues & Solutions
+MongoDB Connection Issues
+bash# Ensure MongoDB is running
+mongod
+
+# Or use MongoDB Atlas connection string in .env
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/usermodel
+Port Already in Use
+bash# Kill process using port 3000
+lsof -i :3000
+kill -9 <PID>
+
+# Or change port in .env
+PORT=3001
+CORS Errors
+
+Verify CORS_ORIGIN in backend .env matches frontend URL
+Ensure VITE_API_URL in frontend .env is correct
+
+📊 Project Statistics
+
+Total API Endpoints: 8
+Database Collections: 1 (Users)
+Frontend Components: 11 reusable components
+Redux Slices: 2 (auth, users)
+Admin Features: 4
+Protected Routes: 4
+
+🔒 Security Features
+✅ Password hashing with bcryptjs (10 salt rounds)
+✅ JWT-based authentication
+✅ CORS protection
+✅ Input validation (Joi)
+✅ HTTP-only cookies support
+✅ Role-based access control
+✅ Protected API endpoints
+🎓 Learning Resources
+
+Express.js Docs
+React Documentation
+MongoDB Docs
+Redux Toolkit Docs
+Tailwind CSS Docs
+
+📈 Future Enhancements
+
+ Email verification for new accounts
+ Password reset functionality
+ Two-factor authentication (2FA)
+ User activity logs
+ Advanced analytics and reports
+ Bulk user operations
+ Export users to CSV/PDF
+ Dark mode support
+ API rate limiting
+ User audit trail
+
+🚀 Quick Start Commands
+bash# Clone and setup
+git clone https://github.com/yourusername/usermodel.git
+cd usermodel
+
+# Backend setup
+cd usermodel-backend
+npm install
+npm run dev
+
+# Frontend setup (new terminal)
+cd ../usermodel-frontend
+npm install
+npm run dev
+
+# Access the application
+# Frontend: http://localhost:5173
+# Backend: http://localhost:3000
+
+📞 Contact & Support
+GitHub Issues: Report bugs or request features
+Email: -
+Live Chat: -
